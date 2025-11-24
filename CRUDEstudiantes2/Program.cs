@@ -46,8 +46,29 @@ namespace CRUDEstudiantes
         {
             Console.Write("Nombre: ");
             string nombre = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(nombre))
+            {
+                Console.WriteLine("El nombre no puede estar vacio!");
+                Console.ReadKey();
+                return;
+            }
+
             Console.Write("Edad: ");
-            int edad = int.Parse(Console.ReadLine());
+            int edad;
+            if (!int.TryParse(Console.ReadLine(), out edad))
+            {
+                Console.WriteLine("Edad invalida!");
+                Console.ReadKey();
+                return;
+            }
+
+            if (edad < 0 || edad > 100)
+            {
+                Console.WriteLine("Edad debe estar entre 0 y 100!");
+                Console.ReadKey();
+                return;
+            }
 
             Estudiante nuevo = new Estudiante
             {
