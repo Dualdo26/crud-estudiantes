@@ -81,11 +81,22 @@ namespace CRUDEstudiantes
                 return;
             }
 
+            Console.Write("Matricula: ");
+            string matricula = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(matricula))
+            {
+                Console.WriteLine("La matricula no puede estar vacia!");
+                Console.ReadKey();
+                return;
+            }
+
             Estudiante nuevo = new Estudiante
             {
                 Id = contadorId++,
                 Nombre = nombre,
-                Edad = edad
+                Edad = edad,
+                Matricula = matricula  
             };
 
             estudiantes.Add(nuevo);
@@ -103,7 +114,7 @@ namespace CRUDEstudiantes
             {
                 foreach (var est in estudiantes)
                 {
-                    Console.WriteLine($"ID: {est.Id} - Nombre: {est.Nombre} - Edad: {est.Edad}");
+                    Console.WriteLine($"ID: {est.Id} - Nombre: {est.Nombre} - Edad: {est.Edad} - Matricula: {est.Matricula}");
                 }
             }
             Console.ReadKey();
@@ -122,6 +133,8 @@ namespace CRUDEstudiantes
                 Console.Write("Nueva edad: ");
                 estudiante.Edad = int.Parse(Console.ReadLine());
                 Console.WriteLine("Estudiante actualizado!");
+                Console.Write("Nueva matricula: ");
+                estudiante.Matricula = Console.ReadLine();
             }
             else
             {
@@ -164,7 +177,7 @@ namespace CRUDEstudiantes
                 Console.WriteLine($"Se encontraron {encontrados.Count} estudiante(s):");
                 foreach (var est in encontrados)
                 {
-                    Console.WriteLine($"ID: {est.Id} - Nombre: {est.Nombre} - Edad: {est.Edad}");
+                    Console.WriteLine($"ID: {est.Id} - Nombre: {est.Nombre} - Edad: {est.Edad} - Matricula: {est.Matricula}");
                 }
             }
             Console.ReadKey();
@@ -184,5 +197,7 @@ namespace CRUDEstudiantes
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int Edad { get; set; }
+        public string Matricula { get; set; }
+
     }
 }
