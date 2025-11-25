@@ -19,7 +19,8 @@ namespace CRUDEstudiantes
                 Console.WriteLine("2. Listar Estudiantes");
                 Console.WriteLine("3. Actualizar Estudiante");
                 Console.WriteLine("4. Eliminar Estudiante");
-                Console.WriteLine("5. Salir");
+                Console.WriteLine("5. Buscar Estudiante");
+                Console.WriteLine("6. Salir");
                 Console.Write("Seleccione una opcion: ");
 
                 opcion = int.Parse(Console.ReadLine());
@@ -38,8 +39,13 @@ namespace CRUDEstudiantes
                     case 4:
                         EliminarEstudiante();
                         break;
+                    case 5:
+                        BuscarEstudiante();
+                        break;
+                    case 6:
+                        break;
                 }
-            } while (opcion != 5);
+            } while (opcion != 6);
         }
 
         static void CrearEstudiante()
@@ -133,6 +139,28 @@ namespace CRUDEstudiantes
             else
             {
                 Console.WriteLine("Estudiante no encontrado.");
+            }
+            Console.ReadKey();
+        }
+
+        static void BuscarEstudiante()
+        {
+            Console.Write("Nombre a buscar: ");
+            string nombre = Console.ReadLine();
+
+            var encontrados = estudiantes.FindAll(e => e.Nombre.ToLower().Contains(nombre.ToLower()));
+
+            if (encontrados.Count == 0)
+            {
+                Console.WriteLine("No se encontraron estudiantes.");
+            }
+            else
+            {
+                Console.WriteLine($"Se encontraron {encontrados.Count} estudiante(s):");
+                foreach (var est in encontrados)
+                {
+                    Console.WriteLine($"ID: {est.Id} - Nombre: {est.Nombre} - Edad: {est.Edad}");
+                }
             }
             Console.ReadKey();
         }
