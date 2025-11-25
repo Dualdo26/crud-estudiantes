@@ -21,7 +21,8 @@ namespace CRUDEstudiantes
                 Console.WriteLine("4. Eliminar Estudiante");
                 Console.WriteLine("5. Buscar Estudiante");
                 Console.WriteLine("6. Ver total de estudiantes");
-                Console.WriteLine("7. Salir");
+                Console.WriteLine("7. Ordenar estudiantes por nombre");
+                Console.WriteLine("8. Salir");
                 Console.Write("Seleccione una opcion: ");
 
                 opcion = int.Parse(Console.ReadLine());
@@ -47,10 +48,13 @@ namespace CRUDEstudiantes
                         MostrarContador();
                         break;
                     case 7:
+                        OrdenarPorNombre();
                         break;
-                        
+                    case 8:
+                        break;
+
                 }
-            } while (opcion != 7);
+            } while (opcion != 8);
         }
 
         static void CrearEstudiante()
@@ -189,6 +193,20 @@ namespace CRUDEstudiantes
             Console.WriteLine($"Total de estudiantes registrados: {estudiantes.Count}");
             Console.WriteLine("=========================");
             Console.ReadKey();
+        }
+        static void OrdenarPorNombre()
+        {
+            if (estudiantes.Count == 0)
+            {
+                Console.WriteLine("No hay estudiantes para ordenar.");
+            }
+            else
+            {
+                estudiantes.Sort((a, b) => a.Nombre.CompareTo(b.Nombre));
+                Console.WriteLine("Estudiantes ordenados alfabeticamente!");
+                Console.WriteLine();
+                ListarEstudiantes();
+            }
         }
     }
 
